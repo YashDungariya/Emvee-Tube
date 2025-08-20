@@ -26,7 +26,9 @@ body {
 .nav-link.text-brand-orange::after {
     width: 100%;
 }
-
+.myborder {
+    border: 1px solid white;
+}
 
 .container {
     /* max-width: 800px; */
