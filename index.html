@@ -162,6 +162,77 @@
 
 </head>
 
+
+  
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll("#main-nav a, #mobile-menu a");
+  
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute("id");
+  
+              // Sabse pehle sab links se active class hatao
+              navLinks.forEach((link) => {
+                link.classList.remove("text-brand-orange", "font-bold");
+                link.classList.add("text-gray-600");
+              });
+  
+              // Jo section visible hai uske link ko active karo
+              navLinks.forEach((link) => {
+                if (link.getAttribute("href") === `#${id}`) {
+                  link.classList.add("text-brand-orange", "font-bold");
+                  link.classList.remove("text-gray-600");
+                }
+              });
+            }
+          });
+        },
+        { threshold: 0.6 } // 60% section visible hote hi active ho jayega
+      );
+  
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+    });
+  </script>
+<!-- After nav and products section -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const productsSection = document.getElementById('products');
+      const navLinks = document.querySelectorAll('#main-nav .nav-link');
+  
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Remove highlight from all nav links
+              navLinks.forEach(link => {
+                link.classList.remove('text-brand-orange', 'font-bold');
+              });
+              // Add highlight to Products dropdown button
+              const productsLink = document.getElementById('products-dropdown-button');
+              productsLink.classList.add('text-brand-orange', 'font-bold');
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.3
+        }
+      );
+  
+      if (productsSection) observer.observe(productsSection);
+    });
+  </script>
+  
+  
+  
+
 <body class="bg-white text-gray-800 opacity-0 transition-opacity duration-700 ease-out">
 
     <!-- Top Bar -->
@@ -203,18 +274,21 @@
                     <img src="logo.svg" alt="Emveepark Logo - Stack Parking Company" class="h-16">
                 </a>
                 <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
-                    <a href="index.html"
+                    <a href="#Home"
                         class="nav-link text-brand-orange hover:text-brand-orange transition-colors font-bold">Home</a>
                     <a href="#about"
                         class="nav-link text-gray-600 hover:text-brand-orange transition-colors font-medium">About</a>
-
+ <!-- Scroll Spy Link for Products Section -->
+ <a href="#products" id="products-scrollspy" class="nav-link hidden"></a>
                         <div class="relative" id="products-dropdown-container">
-                            <a href="All-Tube-Filling-machines.html" id="products-dropdown-button"
+                            <a href="All-Tube-Filling-machines.html" id="products-dropdown-button" 
                                 class="nav-link flex items-center text-gray-600 hover:text-brand-orange transition-colors font-medium">
                                 <span>Products</span>
                                 <i id="products-arrow-icon" data-lucide="chevron-down"
                                     class="h-4 w-4 ml-1 transition-transform duration-300"></i>
                             </a>
+                           
+
                         
                             <div id="products-dropdown-menu"
                                 class="absolute top-full left-1/2 -translate-x-1/2 w-max bg-white rounded-md shadow-lg p-6 ring-1 ring-black ring-opacity-5 opacity-0 scale-95 pointer-events-none transition-all duration-300 ease-out z-50">
@@ -301,7 +375,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <!-- Scroll Spy Link for Products Section -->
+                        <a href="#products" id="products-scrollspy" class="nav-link hidden"></a>
+    
 
                     <a href="#videos"
                         class="nav-link text-gray-600 hover:text-brand-orange transition-colors font-medium">Videos</a>
@@ -379,7 +455,7 @@
 
     <main id="main-content">
        <!-- Hero Section -->
-<section class="relative h-[60vh] md:h-[80vh] bg-cover bg-center text-white"
+<section class="relative h-[60vh] md:h-[80vh] bg-cover bg-center text-white" id="Home"
 style="background-image: url('tubefilling-hero.png');">
 <div class="absolute inset-0 bg-black/50"></div>
 <div class="relative container mx-auto px-4 lg:px-6 h-full flex flex-col justify-center items-start">
@@ -442,7 +518,7 @@ style="background-image: url('tubefilling-hero.png');">
 
 
         <!-- Products Section -->
-        <section id="products" class="py-16 md:py-24">
+        <section id="products"  class="py-16 md:py-24">
             <div class="container mx-auto px-4 lg:px-6 text-center">
                 <div class="mb-4 text-sm text-gray-500">
                     <a href="https://emveeparkeasy.com" class="hover:text-brand-orange">Home</a> &raquo; Products
@@ -638,7 +714,7 @@ style="background-image: url('tubefilling-hero.png');">
 
 
         <!-- FAQ Section -->
-        <section id="faq" class="bg-gray-50">
+        <section id="Home" class="bg-gray-50">
             <div class="container">
               <!-- <h2></h2> -->
               <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">Frequently Asked Questions</h2>
